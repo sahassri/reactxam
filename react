@@ -1,5 +1,6 @@
 LINEAR:
 1,2:
+(Alex,Coding competition)
 #include<iostream>
 using namespace std;
 int main(){
@@ -28,7 +29,7 @@ int main(){
 }
 
 
-3:
+3:(Sarah)
 #include<iostream>
 using namespace std;
 int main(){
@@ -130,7 +131,7 @@ int main(){
 }
 
 GREEDY ALGORITHM:
-1.
+1.(Coin change)
 
 #include<iostream>
 #include<vector>
@@ -169,7 +170,7 @@ int main(){
     cout<<ans.size()<<endl;
 }
 
-2.
+2.(start and end time)
 
 #include <iostream>
 using namespace std;
@@ -209,7 +210,7 @@ int main(){
     cout<<cnt;
 }
 
-3.
+3.(entreprenur)
 
 #include <iostream>
 #include <vector>
@@ -267,7 +268,7 @@ int main() {
 }
 
 PATTERN:
-1.	
+1.	(text editor)
 #include <iostream>
 #include <string>
 using namespace std;
@@ -311,7 +312,7 @@ int main() {
 
     return 0;
 }
-2. 
+2. (case insensitive)
 #include <iostream>
 #include <string>
 using namespace std;
@@ -366,11 +367,10 @@ int main() {
         }
     return 0;
 }
-3. 
 
 
 BACKTRACKING 
-1. 
+1. (chess)
 #include<iostream>
 using namespace std;
 void display(int **mat,int num){
@@ -436,7 +436,7 @@ int main(){
     return 0;
 }
 
-2,3:
+2,3:(sudoku)
 #include<iostream>
 using namespace std;
 const int S=9;
@@ -505,7 +505,7 @@ int main(){
 }
 
 DYNAMIC:
-1.
+1.(Mathematician)
 
 #include<iostream>
 #include<vector>
@@ -533,7 +533,7 @@ int main() {
     return 0;
 }
 
-2.
+2.(Scientists)
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -582,7 +582,7 @@ int main() {
 }
 
 
-3.
+3.(Trader)
 
 #include <iostream>
 #include <climits>
@@ -622,7 +622,7 @@ int main() {
     return 0;
 }
 RANGE QUERY:
-1.
+1.(Max)
 
 #include <iostream>
 #include <vector>
@@ -655,7 +655,7 @@ int main() {
     return 0;
 }
 
-2.
+2.(Gardener)
 #include <iostream>
 #include <vector>
 #include <limits.h>
@@ -687,7 +687,7 @@ int main() {
 }
 
 
-3.
+3.(Cybersecurity)
 
 #include <iostream>
 #include <vector>
