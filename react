@@ -1674,3 +1674,233 @@ i=x-1;
  for(j=0;j<m[i];j++)
  printf("%d ",b[i][j]);
  }
+
+
+fcfs:
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float awai,atur;
+    printf("Number of process:");
+    scanf("%d",&n);
+    int burst[n],wait[n],turn[n];
+    printf("Enter burst time:");
+    for(int i=0;i<n;i++){
+        printf("Process %d ",i+1);
+        scanf("%d",&burst[i]);
+    }
+    wait[0]=0;
+    for(int i=1;i<n;i++){
+        wait[i]=wait[i-1]+burst[i-1];
+        awai+=wait[i];
+    }
+    for(int i=0;i<n;i++){
+        turn[i]=burst[i]+wait[i];
+        atur+=turn[i];
+    }
+    awai/=n;
+    atur/=n;
+    printf("Average Waiting Time:%.2f\n",awai);
+    printf("Average Turnaround Time:%.2f\n",atur);
+}
+
+cpu sjf and srtf:
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float awai,atur;
+    printf("Number of process:");
+    scanf("%d",&n);
+    int process[n], burst[n],wait[n],turn[n];
+    printf("Enter burst time:");
+    for(int i=0;i<n;i++){
+        process[i]=i+1;
+        printf("Process %d ",i+1);
+        scanf("%d",&burst[i]);
+    }
+    for(int i=0;i<n-1;i++){
+        for(int j=i+1;j<n;j++){
+            if(burst[i]>burst[j]){
+                int temp=burst[i];
+                burst[i]=burst[j];
+                burst[j]=temp;
+                
+                temp=process[i];
+                process[i]=process[j];
+                process[j]=temp;
+            }
+        }
+    }
+    wait[0]=0;
+    for(int i=1;i<n;i++){
+        wait[i]=wait[i-1]+burst[i-1];
+        awai+=wait[i];
+    }
+    for(int i=0;i<n;i++){
+        turn[i]=burst[i]+wait[i];
+        atur+=turn[i];
+    }
+    awai/=n;
+    atur/=n;
+    printf("Average Waiting Time:%.2f\n",awai);
+    printf("Average Turnaround Time:%.2f\n",atur);
+}
+
+
+priority:
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float awai,atur;
+    printf("Number of process:");
+    scanf("%d",&n);
+    int process[n], burst[n],wait[n],turn[n],arr[n],pri[n];
+    printf("Enter burst time:");
+    for(int i=0;i<n;i++){
+        process[i]=i+1;
+        printf("Process %d ",i+1);
+        scanf("%d",&burst[i]);
+    }
+    for(int i=0;i<n;i++){
+        
+        printf("Process %d ",i+1);
+        scanf("%d",&pri[i]);
+    }
+    
+    for(int i=0;i<n-1;i++){
+        for(int j=i+1;j<n;j++){
+            if(pri[i]>pri[j]){
+                int temp=burst[i];
+                burst[i]=burst[j];
+                burst[j]=temp;
+                
+                temp=process[i];
+                process[i]=process[j];
+                process[j]=temp;
+                
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                
+                temp=pri[i];
+                pri[i]=pri[j];
+                pri[j]=temp;
+            }
+        }
+    }
+    wait[0]=0;
+    turn[0]=burst[0];
+    awai += wait[0];
+    atur += turn[0];
+    for(int i=1;i<n;i++){
+        if(turn[i-1]>=arr[i-1]){
+            wait[i]=turn[i-1]+arr[i];
+        }
+        else{
+            wait[i]=0;
+        }
+        turn[i]=burst[i]+wait[i];
+        awai+=wait[i];
+        atur+=turn[i];
+    }
+    awai/=n;
+    atur/=n;
+ 
+    printf("Average Waiting Time:%.2f\n",awai);
+    printf("Average Turnaround Time:%.2f\n",atur);
+}
+
+
+round robin
+#include <stdio.h>
+
+int main() {
+    int n, tq, time = 0, remaining;
+    printf("Enter number of processes and time quantum: ");
+    scanf("%d %d", &n, &tq);
+    remaining = n;
+
+    int bt[n], rt[n], wt = 0, tat = 0;
+    printf("Enter burst times: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &bt[i]);
+        rt[i] = bt[i];  
+    }
+
+    while (remaining > 0) {
+        for (int i = 0; i < n; i++) {
+            if (rt[i] > 0) {
+                int t = (rt[i] > tq) ? tq : rt[i];
+                time += t;
+                rt[i] -= t;
+                
+                
+                if (rt[i] == 0) {
+                    remaining--;  
+                    wt += time - bt[i];  
+                    tat += time;  
+                }
+            }
+        }
+    }
+
+    printf("\nAverage Waiting Time: %.2f\n", (float)wt / n);
+    printf("Average Turnaround Time: %.2f\n", (float)tat / n);
+
+    return 0;
+}
+
+bankers:
+#include <stdio.h>
+
+int main() {
+    int n = 3; 
+    int m = 3;
+
+    int available[] = {3, 3, 2}; 
+    int max[3][3] = {{7, 5, 3}, {3, 2, 2}, {9, 0, 2}};
+    int allocation[3][3] = {{0, 1, 0}, {2, 0, 0}, {3, 0, 2}}; // 
+    int need[3][3];
+    int finish[3] = {0};
+    int safe_sequence[3];
+    int count = 0;
+
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            need[i][j] = max[i][j] - allocation[i][j];
+        }
+    }
+
+        for (int i = 0; i < n; i++) {
+            if (finish[i] == 0) { 
+                int can_allocate = 1;
+                for (int j = 0; j < m; j++) {
+                    if (need[i][j] > available[j]) { 
+                        can_allocate = 0;
+                        break;
+                    }
+                }
+                if (can_allocate) {  
+                    for (int j = 0; j < m; j++) {
+                        available[j] += allocation[i][j]; 
+                    }
+                    safe_sequence[count++] = i; 
+                    finish[i] = 1;
+                }
+            }
+        }
+
+    printf("Safe sequence: ");
+    for (int i = 0; i < count; i++) {
+        if (finish[safe_sequence[i]] == 1) {
+            printf("P%d ", safe_sequence[i]);
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
